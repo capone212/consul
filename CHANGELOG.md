@@ -20,6 +20,9 @@ FEATURES:
   used. [GH-1712]
 * Prepared queries support baking in the `Near` sorting parameter. [GH-2137]
 * Added Circonus support for telemetry. [GH-2193]
+* Implemented a new set of feedback controls for the gossip layer that help
+  prevent degraded nodes that can't meet the soft real-time requirements from
+  erroneously causing `serfHealth` flapping in other, healthy nodes. [GH-2101]
 
 BACKWARDS INCOMPATIBILITIES:
 
@@ -33,9 +36,6 @@ IMPROVEMENTS:
 * Consul will now retry RPC calls that result in "no leader" errors for up to
   5 seconds. This allows agents to ride out leader elections with a delayed
   response vs. an error. [GH-2175]
-* Implemented a new set of feedback controls for the gossip layer that help
-  prevent degraded nodes that can't meet the soft real-time requirements from
-  erroneously causing `serfHealth` flapping in other, healthy nodes. [GH-2101]
 * Joins based on a DNS lookup will use TCP and attempt to join with the full
   list of returned addresses. [GH-2101]
 * Added a new network tomogroaphy visualization to the UI. [GH-2046]
@@ -66,6 +66,8 @@ BUG FIXES:
 * Fixed an issue where a health check's output never updates if the check
   status doesn't change after the Consul agent starts. [GH-1934]
 * External services can now be registered with ACL tokens. [GH-1738]
+* Upgraded Bolt DB to v1.2.1 to fix an issue on Windows where Consul would sometimes
+  fail to start due to open user-mapped sections. [GH-2203].
 
 ## 0.6.4 (March 16, 2016)
 
